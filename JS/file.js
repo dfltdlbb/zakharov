@@ -441,8 +441,7 @@ function submitCommandIfAny() {
   const cmd = raw.replace(/\n+/g, '').trim();
   if (!cmd) { cliInputDiv.innerHTML = ''; return; }
 
-  // Авто-fullscreen по Enter отключён везде
-  // if (!isTouch() && !isFS()) enterFS(cliContainer);
+if (!isTouch()) enterFS(cliContainer);
 
   processCommand(cmd);
   cliInputDiv.innerHTML = '';
