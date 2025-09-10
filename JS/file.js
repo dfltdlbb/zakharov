@@ -417,9 +417,8 @@ function appendOutput(text){
         break;
 
       case '/date':
-        appendOutput('- Сайт обновлялся последний раз 9 сентября 2025 года');
-        appendOutput('\u00A0');
-        appendOutput('- [Следить на Github](https://t.me/default_db) -');
+        appendOutput('- Сайт обновлялся последний раз 10 сентября 2025 года');
+        appendOutput('- [Следить на Github](https://t.me/default_db)');
         break;
 
       case '/reset':
