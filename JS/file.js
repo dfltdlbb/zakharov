@@ -430,64 +430,94 @@ function appendOutput(text){
     }
   }
 
-  // === обработчики ввода (фиксы Enter на мобилках) ===
-  const getPlain = () => cliInputDiv.innerText || cliInputDiv.textContent || '';
-  const containsBR = () => /<br\s*\/?>/i.test(cliInputDiv.innerHTML);
-  const containsDivLine = () => /<div>/i.test(cliInputDiv.innerHTML);
-  const containsLineBreakText = () => /\n/.test(getPlain());
+// === обработчики ввода (фиксы Enter на мобилках) ===
+const getPlain = () => cliInputDiv.innerText || cliInputDiv.textContent || '';
+const containsBR = () => /<br\s*\/?>/i.test(cliInputDiv.innerHTML);
+const containsDivLine = () => /<div>/i.test(cliInputDiv.innerHTML);
+const containsLineBreakText = () => /\n/.test(getPlain());
 
-  function submitCommandIfAny() {
-    const raw = getPlain();
-    const cmd = raw.replace(/\n+/g, '').trim();
-    if (!cmd) { cliInputDiv.innerHTML = ''; return; }
+function submitCommandIfAny() {
+  const raw = getPlain();
+  const cmd = raw.replace(/\n+/g, '').trim();
+  if (!cmd) { cliInputDiv.innerHTML = ''; return; }
 
-    // На десктопе — можно открыть fullscreen, на тач-устройствах не трогаем
-    if (!isTouch() && !isFS()) enterFS(cliContainer);
+  // Авто-fullscreen по Enter отключён везде
+  // if (!isTouch() && !isFS()) enterFS(cliContainer);
 
-    processCommand(cmd);
-    cliInputDiv.innerHTML = '';
+  processCommand(cmd);
+  cliInputDiv.innerHTML = '';
+}
+
+// 1) Десктоп: стандартный Enter
+cliInputDiv.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    submitCommandIfAny();
+  }
+});
+// 2) Мобилки: ловим beforeinput с insertLineBreak
+cliInputDiv.addEventListener('beforeinput', (e) => {
+  if (e.inputType === 'insertLineBreak') {
+    e.preventDefault();
+    submitCommandIfAny();
+  }
+});
+// 3) Мобилки: fallback — ловим появление \n или <br>/<div>
+cliInputDiv.addEventListener('input', () => {
+  if (containsLineBreakText() || containsBR() || containsDivLine()) {
+    submitCommandIfAny();
+  }
+});
+// 4) Очень старые браузеры (keypress)
+cliInputDiv.addEventListener('keypress', (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    submitCommandIfAny();
+  }
+});
+
+// Esc — выход из полноэкрана
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isFS()) exitFS(); });
+
+// === Кнопка Enter/Exit у терминала ===
+// - Если сейчас fullscreen активен — выходим из FS (без эмуляции Enter)
+// - Если fullscreen НЕ активен — эмулируем Enter,
+//   а вход в fullscreen разрешаем только на десктопе
+fullBtn.addEventListener('click', () => {
+  if (isFS()) {
+    exitFS();
+    return;
   }
 
-  // 1) Десктоп: стандартный Enter
-  cliInputDiv.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      submitCommandIfAny();
-    }
-  });
-  // 2) Мобилки: ловим beforeinput с insertLineBreak
-  cliInputDiv.addEventListener('beforeinput', (e) => {
-    if (e.inputType === 'insertLineBreak') {
-      e.preventDefault();
-      submitCommandIfAny();
-    }
-  });
-  // 3) Мобилки: fallback — ловим появление \n или <br>/<div>
-  cliInputDiv.addEventListener('input', () => {
-    if (containsLineBreakText() || containsBR() || containsDivLine()) {
-      submitCommandIfAny();
-    }
-  });
-  // 4) Очень старые браузеры (keypress)
-  cliInputDiv.addEventListener('keypress', (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      submitCommandIfAny();
-    }
+  // Всегда эмулируем Enter
+  try {
+    cliInputDiv.focus();
+    const ev = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      code: 'Enter',
+      keyCode: 13,
+      which: 13,
+      bubbles: true,
+      cancelable: true
+    });
+    cliInputDiv.dispatchEvent(ev);
+  } catch (_) {}
+
+  // Фолбэк: если synthetic keydown проигнорировали
+  queueMicrotask(() => {
+    try { submitCommandIfAny(); } catch (_) {}
   });
 
-  // Esc — выход из полноэкрана
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isFS()) exitFS(); });
+  // ⛔️ На мобильных не входим в fullscreen
+  if (!isTouch()) {
+    enterFS(cliContainer);
+  }
+});
 
-  // === Кнопка Enter/Exit у терминала ===
-  // - Если сейчас fullscreen активен (кнопка «Exit») — просто выходим из FS (без эмуляции Enter)
-  // - Если fullscreen НЕ активен (кнопка «Enter») — эмулируем нажатие клавиши Enter в CLI
-  fullBtn.addEventListener('click', () => {
-    if (isFS()) {
-      exitFS();
-      return;
-    }
-    // Эмулируем Enter для CLI
+// === Кнопка Enter в intro (если есть) — тоже жмёт Enter в CLI ===
+const introEnterBtn = document.querySelector('#intro-enter-btn, .intro .enter-btn, [data-enter-trigger]');
+if (introEnterBtn) {
+  introEnterBtn.addEventListener('click', () => {
     try {
       cliInputDiv.focus();
       const ev = new KeyboardEvent('keydown', {
@@ -500,41 +530,15 @@ function appendOutput(text){
       });
       cliInputDiv.dispatchEvent(ev);
     } catch (_) {}
-
-    // Фолбэк: если synthetic keydown игнорируется
     queueMicrotask(() => {
       try { submitCommandIfAny(); } catch (_) {}
     });
-
-    // Поведение как раньше — вход в fullscreen (на десктопе)
-    enterFS(cliContainer);
   });
+}
 
-  // === Кнопка Enter в intro (если есть) — тоже жмёт Enter в CLI ===
-  const introEnterBtn = document.querySelector('#intro-enter-btn, .intro .enter-btn, [data-enter-trigger]');
-  if (introEnterBtn) {
-    introEnterBtn.addEventListener('click', () => {
-      try {
-        cliInputDiv.focus();
-        const ev = new KeyboardEvent('keydown', {
-          key: 'Enter',
-          code: 'Enter',
-          keyCode: 13,
-          which: 13,
-          bubbles: true,
-          cancelable: true
-        });
-        cliInputDiv.dispatchEvent(ev);
-      } catch (_) {}
-      queueMicrotask(() => {
-        try { submitCommandIfAny(); } catch (_) {}
-      });
-    });
-  }
+// Стартовый текст
+clearOutput();
 
-  // Стартовый текст
-  clearOutput();
-});
 
 /* =========================================================
    5) «А чего так мало?» — запуск по вьюпорту, быстрый тайпинг
