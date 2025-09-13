@@ -84,13 +84,9 @@ blockquote,pre,code,kbd,samp{
 /* Меню/бургер */
 .menu-toggle{
   display:none; place-items:center; padding:.45rem .6rem;
-  border:1px solid var(--border); background:#07140f; border-radius:10px; color: #fff; color: var(--pico-primary-inverse, #fff);
-}
-.menu-toggle .i{ width:1.2em; height:1.2em; fill: currentColor; stroke: none; }
-.menu-toggle .i, .menu-toggle .i * { fill: currentColor !important; stroke: none !important; }
-.menu{
-  display:flex; align-items:center;
-}
+  border:1px solid var(--border); background:#07140f; border-radius:10px;}
+.menu-toggle .i{ width:1.2em; height:1.2em; }
+.menu{display:flex; align-items:center;}
 .menu a{
   position:relative; display:inline-flex; align-items:center;
   padding:.22rem .5rem; border-radius:8px;
