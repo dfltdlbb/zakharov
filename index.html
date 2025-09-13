@@ -16,8 +16,14 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=PT+Mono&display=swap" rel="stylesheet">
     <style>
-@media (max-width:400px){
-  html{ outline:4px solid red !important; }
+.skill-cloud>*{margin:2.5px}
+@supports (gap:5px){
+  .skill-cloud{margin:0;gap:5px}
+  .skill-cloud>*{margin:0}
+}
+@media (max-width:414px){
+  .skill-cloud{margin:-2px}
+  .skill-cloud>*{margin:2px!important}
 }
 </style>
 
