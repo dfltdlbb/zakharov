@@ -293,10 +293,6 @@ ul li{ list-style-position:inside!important; list-style:square; }
 .skill-legend{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
 .legend-note{ color:var(--muted); font-size:12.5px; }
 .skill-cloud{ display:flex; flex-wrap:wrap; gap:5px; }
- @media screen and (max-width: 400px) {
-  .skill .skill--advanced .skill--on {margin: 3px!important;}
-  }
-
 .skill{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:12px; }
 .skill--beginner{ background:#1d3e7a; color:#e6f0ff; }
 .skill--intermediate{ background:#7a5f1d; color:#fff6d9; }
