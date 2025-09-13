@@ -294,7 +294,7 @@ ul li{ list-style-position:inside!important; list-style:square; }
 .legend-note{ color:var(--muted); font-size:12.5px; }
 .skill-cloud{ display:flex; flex-wrap:wrap; gap:5px; }
  @media screen and (max-width: 400px) {
-  .skill--on {margin: 3px!important;}
+  .skill .skill--advanced .skill--on {margin: 3px!important;}
   }
 
 .skill{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:12px; }
