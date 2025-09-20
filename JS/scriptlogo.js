@@ -9,7 +9,7 @@
     '#ManagerIT',
     '#AccountManager',
     '#CustomerSuccess',
-    '#DmitriiZakharov' // финальное значение
+    '#DmitriiZaharov'
   ];
 
   const prefix = ''; // поставь '#' если нужно

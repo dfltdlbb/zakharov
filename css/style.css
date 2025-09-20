@@ -602,3 +602,49 @@ a.btn{ text-decoration:none; }         /* якоря-кнопки выглядя
 
 /* Neon Arrow: мобилка — меньше иконка */
 @media (max-width:640px){ .neon-arrow svg{ width:30px; } }
+
+/* === EDU block: v3 adjustments === */
+
+/* underline ONLY the summary text (like a link) */
+.bottom {
+  margin-bottom: 0px!important;
+}
+.details-sm{
+  margin-bottom: 0px!important;
+}
+.edu-wrap summary{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* body text (inside accordion) aligned right and smaller */
+.edu-wrap > :not(summary){
+  text-align: left;
+}
+
+.edu-wrap > .lead{
+  margin-bottom: 0 !important;
+  text-decoration: none !important; /* ensure only summary is underlined */
+}
+
+/* keep marker/arrow hidden for this block */
+.edu-wrap summary::-webkit-details-marker { display: none; }
+.edu-wrap summary::marker { content: ""; display: none; }
+.edu-wrap summary::after { display: none !important; content: none !important; }
+
+details summary::after, details summary:not([role]), 
+details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus) {
+  text-align: right;
+  font-size: 13px;
+}
+.right {
+  text-align: left!important;
+  font-size: 19px!important;
+}
+
+@media (max-width: 600px) {
+details summary::after, details summary:not([role]), 
+details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus) {
+  text-align: left;
+}
+}
