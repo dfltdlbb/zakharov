@@ -291,7 +291,7 @@ ul li{ list-style-position:inside!important; list-style:square; }
 
 .skills-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .skill-legend{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
-.legend-note{ color:var(--muted); font-size:12.5px; }
+.legend-note{ display:flex; align-items: center; color:var(--muted); font-size:12.5px; }
 .skill-cloud{ display:flex; flex-wrap:wrap; gap:5px; }
 .skill{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:12px; }
 .skill--beginner{ background:#1d3e7a; color:#e6f0ff; }
@@ -647,4 +647,14 @@ details summary::after, details summary:not([role]),
 details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus) {
   text-align: left;
 }
+}
+/*поддержка GAP для Ябраузер лайт */
+.skill-cloud>*{margin:2.5px}
+@supports (gap:5px){
+  .skill-cloud{margin:0;gap:5px}
+  .skill-cloud>*{margin:0}
+}
+@media (max-width:414px){
+  .skill-cloud{margin:-2px}
+  .skill-cloud>*{margin:2px!important}
 }
