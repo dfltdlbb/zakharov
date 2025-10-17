@@ -657,3 +657,17 @@ details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus)
   .skill-cloud{margin:-2px}
   .skill-cloud>*{margin:2px!important}
 }
+.no-hover {
+  height: max-content!important;
+
+}
+.curs-off {
+  top:45px;
+}
+.curs-off img {
+  height:20px;
+  width: 20px;
+}
+.curs-off:hover {
+  transform: none;
+}
