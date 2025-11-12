@@ -671,3 +671,6 @@ details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus)
 .curs-off:hover {
   transform: none;
 }
+.no-scroll-card {
+  min-height: 305px!important;
+}
