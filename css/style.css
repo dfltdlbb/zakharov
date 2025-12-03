@@ -674,6 +674,6 @@ details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus)
 .no-scroll-card {
   min-height: 305px !important;
 }
-@media (min-width: 1024px) {.dev-card {grid-template-columns: 1.25fr 2.30fr 1fr!important;} }
+.dev-card {grid-template-columns: 1.25fr 2.30fr 1fr;} 
 @media (max-width:1024px){ .dev-card{ grid-template-columns:1fr 1fr; } }
 @media (max-width:720px){ .dev-card{ grid-template-columns:1fr; } }
