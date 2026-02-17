@@ -369,17 +369,17 @@ function appendOutput(text){
 
       case '/now':
         appendOutput('- [Divly.ru](https://divly.ru/) - менеджер продукта, проект-менеджер;');
-        appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
         appendOutput('- [Kwork.ru](https://kwork.ru/user/dmitryzaharov/) - делаю сайты, ботов, настраиваю email-рассылки.');
         break;
 
       case '/past':
+        appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
         appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером;');
         appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - оператор Яндекс справочника.');
         break;
 
       case '/pet':
-        appendOutput('- [ubot.help](https://ubot.help/) - проект-менеджер, разработчик, технический писатель.');
+        appendOutput('- [ubot.help](https://ubot.help/) - когда-то вел, потом надоело.');
         break;
 
       case '/hero':
@@ -417,7 +417,7 @@ function appendOutput(text){
         break;
 
       case '/date':
-        appendOutput('- Сайт обновлялся последний раз 4 февраля 2026 года');
+        appendOutput('- Сайт обновлялся последний раз 17 февраля 2026 года');
         appendOutput('- [Следить на Github](https://github.com/dfltdlbb/zakharov/)');
         break;
 
