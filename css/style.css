@@ -357,6 +357,7 @@ ul li{ list-style-position:inside!important; list-style:square; }
    ======================= */
 .more-card{
   margin-bottom:20px;
+  margin-top: 20px;
   background:#07140f; border:1px solid var(--border); border-radius:var(--radius);
   box-shadow:0 10px 26px rgba(38,255,117,.14), 0 0 18px rgba(38,255,117,.12);
   transition:box-shadow .18s ease;
