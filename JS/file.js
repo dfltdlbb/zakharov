@@ -373,13 +373,14 @@ function appendOutput(text){
         break;
 
       case '/past':
+        appendOutput('- [ubot.help](https://ubot.help/) - когда-то вел, потом надоело');
         appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
         appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером;');
         appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - оператор Яндекс справочника.');
         break;
 
       case '/pet':
-        appendOutput('- [ubot.help](https://ubot.help/) - когда-то вел, потом надоело.');
+        appendOutput('- Пока что не веду пет-проектов');
         break;
 
       case '/hero':
@@ -417,7 +418,7 @@ function appendOutput(text){
         break;
 
       case '/date':
-        appendOutput('- Сайт обновлялся последний раз 27 апреля 2026 года');
+        appendOutput('- Сайт обновлялся последний раз 13 мая 2026 года');
         appendOutput('- [Следить на Github](https://github.com/dfltdlbb/zakharov/)');
         break;
 
