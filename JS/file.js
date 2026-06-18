@@ -418,7 +418,7 @@ function appendOutput(text){
         break;
 
       case '/date':
-        appendOutput('- Сайт обновлялся последний раз 13 мая 2026 года');
+        appendOutput('- Сайт обновлялся последний раз 18 июня 2026 года');
         appendOutput('- [Следить на Github](https://github.com/dfltdlbb/zakharov/)');
         break;
 
