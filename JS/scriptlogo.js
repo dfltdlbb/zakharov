@@ -5,10 +5,10 @@
   if(!el || !logo) return;
 
   const phrases = [
-    '#ProjectManager',
-    '#ManagerIT',
-    '#AccountManager',
-    '#CustomerSuccess',
+    '#Developer',
+    '#Tilda',
+    '#HTML/CSS',
+    '#JavaScript',
     '#DmitriiZaharov'
   ];
 

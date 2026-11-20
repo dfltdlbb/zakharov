@@ -84,7 +84,9 @@ blockquote,pre,code,kbd,samp{
 /* Меню/бургер */
 .menu-toggle{
   display:none; place-items:center; padding:.45rem .6rem;
-  border:1px solid var(--border); background:#07140f; border-radius:10px;}
+  border: 1px solid color-mix(in oklab,var(--panel) 92%,transparent);
+  background: color-mix(in oklab,var(--panel) 92%,transparent);
+}
 .menu-toggle .i{ width:1.2em; height:1.2em; }
 .menu{display:flex; align-items:center;}
 .menu a{
