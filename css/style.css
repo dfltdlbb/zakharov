@@ -680,3 +680,7 @@ details summary:focus:not([role]), details[open]>summary:not([role]):not(:focus)
 .dev-card {grid-template-columns: 1.25fr 2.30fr 1fr;} 
 @media (max-width:1024px){ .dev-card{ grid-template-columns:1fr 1fr; } }
 @media (max-width:720px){ .dev-card{ grid-template-columns:1fr; } }
+.library {
+  border-color: var(--pico-primary-hover);
+  color: var(--pico-primary-hover);
+}
