@@ -240,14 +240,15 @@
 })();
 
 /* =========================================================
-   4) CLI терминал: эмуляция Enter на мобильных/кнопкой + безопасный fullscreen
+   4) CLI терминал: ввод команд и полноэкранный режим
    ========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   const cliOutput    = document.getElementById('cli-output');
   const cliInputDiv  = document.getElementById('cli-input');
+  const submitBtn    = document.getElementById('cli-submit-btn');
   const fullBtn      = document.getElementById('cli-fullscreen-btn');
   const cliContainer = document.getElementById('pipboy-cli');
-  if (!cliOutput || !cliInputDiv || !fullBtn || !cliContainer) return;
+  if (!cliOutput || !cliInputDiv || !cliContainer) return;
 
   // Настройки ввода
   cliInputDiv.setAttribute('enterkeyhint', 'send');
@@ -256,31 +257,46 @@ document.addEventListener('DOMContentLoaded', () => {
   cliInputDiv.setAttribute('autocorrect', 'off');
   cliInputDiv.setAttribute('spellcheck', 'false');
 
-  const d = document;
-  const isFS    = () => !!(d.fullscreenElement || d.webkitFullscreenElement);
-  const isTouch = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (fullBtn) {
+    const requestFullscreen = document.fullscreenEnabled !== false && cliContainer.requestFullscreen
+      ? () => cliContainer.requestFullscreen({ navigationUI: 'hide' })
+      : document.webkitFullscreenEnabled !== false && cliContainer.webkitRequestFullscreen
+        ? () => cliContainer.webkitRequestFullscreen()
+        : null;
 
-  const enterFS = (el) => {
-    try {
-      if (el.requestFullscreen) el.requestFullscreen({ navigationUI: 'hide' });
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    } catch (_) {}
-  };
-  const exitFS = () => {
-    try {
-      if (d.exitFullscreen) d.exitFullscreen();
-      else if (d.webkitExitFullscreen) d.webkitExitFullscreen();
-    } catch (_) {}
-  };
+    if (requestFullscreen) {
+      const isTerminalFullscreen = () =>
+        (document.fullscreenElement || document.webkitFullscreenElement) === cliContainer;
+      const exitFullscreen = () => document.exitFullscreen
+        ? document.exitFullscreen()
+        : document.webkitExitFullscreen?.();
 
-  d.addEventListener('fullscreenchange', syncFSUI);
-  d.addEventListener('webkitfullscreenchange', syncFSUI);
-  function syncFSUI() {
-    const active = isFS();
-    cliContainer.classList.toggle('fullscreen', active);
-    fullBtn.textContent = active ? 'Exit' : 'Enter';
-    fullBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    if (active) cliInputDiv.focus();
+      function syncFullscreen() {
+        const active = isTerminalFullscreen();
+        const wasActive = fullBtn.getAttribute('aria-pressed') === 'true';
+        cliContainer.classList.toggle('fullscreen', active);
+        fullBtn.setAttribute('aria-pressed', String(active));
+        fullBtn.title = active ? 'Свернуть терминал' : 'Развернуть терминал';
+
+        if (active && !wasActive) cliInputDiv.focus({ preventScroll: true });
+        if (!active && wasActive) fullBtn.focus({ preventScroll: true });
+      }
+
+      fullBtn.hidden = false;
+      document.addEventListener('fullscreenchange', syncFullscreen);
+      document.addEventListener('webkitfullscreenchange', syncFullscreen);
+      fullBtn.addEventListener('click', async () => {
+        try {
+          if (isTerminalFullscreen()) {
+            await exitFullscreen();
+          } else {
+            await requestFullscreen();
+          }
+        } catch {
+          syncFullscreen();
+        }
+      });
+    }
   }
 
   // === ТВОЙ ОРИГИНАЛЬНЫЙ ВЫВОД И КОНТЕНТ ===
@@ -431,113 +447,46 @@ function appendOutput(text){
     }
   }
 
-// === обработчики ввода (фиксы Enter на мобилках) ===
-const getPlain = () => cliInputDiv.innerText || cliInputDiv.textContent || '';
-const containsBR = () => /<br\s*\/?>/i.test(cliInputDiv.innerHTML);
-const containsDivLine = () => /<div>/i.test(cliInputDiv.innerHTML);
-const containsLineBreakText = () => /\n/.test(getPlain());
+  // Ввод команды с клавиатуры или по кнопке Enter
+  const getPlain = () => cliInputDiv.innerText || cliInputDiv.textContent || '';
 
-function submitCommandIfAny() {
-  const raw = getPlain();
-  const cmd = raw.replace(/\n+/g, '').trim();
-  if (!cmd) { cliInputDiv.innerHTML = ''; return; }
-
-if (!isTouch()) enterFS(cliContainer);
-
-  processCommand(cmd);
-  cliInputDiv.innerHTML = '';
-}
-
-// 1) Десктоп: стандартный Enter
-cliInputDiv.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    submitCommandIfAny();
-  }
-});
-// 2) Мобилки: ловим beforeinput с insertLineBreak
-cliInputDiv.addEventListener('beforeinput', (e) => {
-  if (e.inputType === 'insertLineBreak') {
-    e.preventDefault();
-    submitCommandIfAny();
-  }
-});
-// 3) Мобилки: fallback — ловим появление \n или <br>/<div>
-cliInputDiv.addEventListener('input', () => {
-  if (containsLineBreakText() || containsBR() || containsDivLine()) {
-    submitCommandIfAny();
-  }
-});
-// 4) Очень старые браузеры (keypress)
-cliInputDiv.addEventListener('keypress', (e) => {
-  if (e.keyCode === 13) {
-    e.preventDefault();
-    submitCommandIfAny();
-  }
-});
-
-// Esc — выход из полноэкрана
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isFS()) exitFS(); });
-
-// === Кнопка Enter/Exit у терминала ===
-// - Если сейчас fullscreen активен — выходим из FS (без эмуляции Enter)
-// - Если fullscreen НЕ активен — эмулируем Enter,
-//   а вход в fullscreen разрешаем только на десктопе
-fullBtn.addEventListener('click', () => {
-  if (isFS()) {
-    exitFS();
-    return;
+  function submitCommandIfAny() {
+    const command = getPlain().replace(/\n+/g, '').trim();
+    if (command) processCommand(command);
+    cliInputDiv.innerHTML = '';
   }
 
-  // Всегда эмулируем Enter
-  try {
+  cliInputDiv.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.isComposing) {
+      event.preventDefault();
+      submitCommandIfAny();
+    }
+  });
+
+  cliInputDiv.addEventListener('beforeinput', (event) => {
+    if (event.inputType === 'insertLineBreak' || event.inputType === 'insertParagraph') {
+      event.preventDefault();
+      submitCommandIfAny();
+    }
+  });
+
+  cliInputDiv.addEventListener('input', (event) => {
+    if (!event.isComposing && (/\n/.test(getPlain()) || /<br\s*\/?>|<div>/i.test(cliInputDiv.innerHTML))) {
+      submitCommandIfAny();
+    }
+  });
+
+  function submitFromButton() {
     cliInputDiv.focus();
-    const ev = new KeyboardEvent('keydown', {
-      key: 'Enter',
-      code: 'Enter',
-      keyCode: 13,
-      which: 13,
-      bubbles: true,
-      cancelable: true
-    });
-    cliInputDiv.dispatchEvent(ev);
-  } catch (_) {}
-
-  // Фолбэк: если synthetic keydown проигнорировали
-  queueMicrotask(() => {
-    try { submitCommandIfAny(); } catch (_) {}
-  });
-
-  // ⛔️ На мобильных не входим в fullscreen
-  if (!isTouch()) {
-    enterFS(cliContainer);
+    submitCommandIfAny();
   }
-});
 
-// === Кнопка Enter в intro (если есть) — тоже жмёт Enter в CLI ===
-const introEnterBtn = document.querySelector('#intro-enter-btn, .intro .enter-btn, [data-enter-trigger]');
-if (introEnterBtn) {
-  introEnterBtn.addEventListener('click', () => {
-    try {
-      cliInputDiv.focus();
-      const ev = new KeyboardEvent('keydown', {
-        key: 'Enter',
-        code: 'Enter',
-        keyCode: 13,
-        which: 13,
-        bubbles: true,
-        cancelable: true
-      });
-      cliInputDiv.dispatchEvent(ev);
-    } catch (_) {}
-    queueMicrotask(() => {
-      try { submitCommandIfAny(); } catch (_) {}
-    });
-  });
-}
+  submitBtn?.addEventListener('click', submitFromButton);
+  const introEnterBtn = document.querySelector('#intro-enter-btn, .intro .enter-btn, [data-enter-trigger]');
+  introEnterBtn?.addEventListener('click', submitFromButton);
 
-// Стартовый текст
-clearOutput();
+  // Стартовый текст
+  clearOutput();
 });
 
 /* =========================================================

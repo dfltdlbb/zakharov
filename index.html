@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=PT+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=2.5" />
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
   <body data-telegram="username_here">
@@ -93,7 +93,18 @@
           <!-- Правая колонка: интерактивный терминал -->
           <div class="pipboy-cli" id="pipboy-cli">
             <div class="dos-terminal">
-              <div class="dos-status-bar">STATUS: в поисках новой работы</div>
+              <div class="dos-status-bar">
+                <span>STATUS: в поисках новой работы</span>
+                <button id="cli-fullscreen-btn" class="cli-fullscreen-toggle" type="button"
+                        aria-label="Полноэкранный режим терминала" aria-controls="pipboy-cli"
+                        aria-pressed="false" title="Развернуть терминал" hidden>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path class="cli-expand-icon" d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6" />
+                    <path class="cli-collapse-icon" d="M3 9h6V3m12 6h-6V3M3 15h6v6m12-6h-6v6" />
+                  </svg>
+                </button>
+              </div>
               <div class="dos-screen">
                 <div class="cli-output" id="cli-output"><p>&gt; Напишите /help для справки</p></div>
                 <div class="cli-input-wrapper">
@@ -103,7 +114,7 @@
                 </div>
               </div>
             </div>
-            <button id="cli-fullscreen-btn" class="btn btn-accent" type="button" aria-pressed="false"><span class="enter-glyph"></span>Enter</button>
+            <button id="cli-submit-btn" class="btn btn-accent" type="button"><span class="enter-glyph" aria-hidden="true"></span>Enter</button>
           </div>
         </div>
       </section>
@@ -441,7 +452,7 @@
 
     <!-- Scripts -->
     <script src="./JS/scriptlogo.js?v=1.5" defer></script>
-    <script src="./JS/file.js?v=2.4" defer></script>
+    <script src="./JS/file.js?v=2.6" defer></script>
     <script src="./JS/card-hover-scroll.js?v=1.5" defer></script>
   </body>
 </html>
