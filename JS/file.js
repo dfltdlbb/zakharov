@@ -349,16 +349,16 @@ function appendOutput(text){
 
   // --- команды/данные ---
   const mail = 'a23059@ya.ru';
-  const fullYears = 29;
+  const fullYears = 30;
 
   function showSkillsDetails() {
-    appendOutput('- Управление проектами: Waterfall, Agile-принципы, Scrum, Kanban, Разработка ТЗ, Прототипирование, Gant, Написание документации и инструкций, Фасилитация встреч, Деловая переписка, Приоритизация под бизнес-цели, Стрессоустойчивость.');
-    appendOutput('- Программы: Kaiten, Notion, Trello, Jira, Google (docs / sheets), Miro, Figma.');
-    appendOutput('- Аналитика: Яндекс.Метрика, А/Б-тест.');
-    appendOutput('- Dev инструменты: HTML, CSS, HTTP-запросы, REST API.');
-    appendOutput('- CMS: uCoz, uApi, Tilda, Flexbe, uKit, WordPress, Open Cart.');
+    appendOutput('- Программы: VS Code, Jira, Yougile, Figma, Miro.');
+    appendOutput('- Аналитика: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
+    appendOutput('- Dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка).');
+    appendOutput('- CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
     appendOutput('- Администрирование: DNS, SSL.');
-    appendOutput('- Маркетинг: SEO, Директ.');
+    appendOutput('- Маркетинг: SEO, Email;');
+    appendOutput('- LLM: разработка совместно с AI, автоматизация.');
   }
 
   function processCommand(rawCmd) {
@@ -379,24 +379,23 @@ function appendOutput(text){
         appendOutput('/live      – где живу');
         appendOutput('/hobby     – чем увлекаюсь');
         appendOutput('/contact   – мессенджеры и почта');
-        appendOutput('/date      – дата последнего обновления сайта');
         appendOutput('/reset     – очистить терминал');
         break;
 
       case '/now':
-        appendOutput('- [Divly.ru](https://divly.ru/) - менеджер продукта, проект-менеджер;');
-        appendOutput('- [Kwork.ru](https://kwork.ru/user/dmitryzaharov/) - делаю сайты, ботов, настраиваю email-рассылки.');
+        appendOutput('- [Марк Инжиниринг jRL Россия](https://jrl-usa.ru/) - веб-разработчик, менеджер статистики;');
+        appendOutput('- [Kwork.ru](https://kwork.ru/user/dmitryzaharov/)  - делаю сайты, ботов, настраиваю email-рассылки.');
         break;
 
       case '/past':
         appendOutput('- [ubot.help](https://ubot.help/) - когда-то вел, потом надоело');
         appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
-        appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером;');
+        appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером, до 2025 года был менеджером проектов и руководил студией, в 2026 перешел на должность разработчик сайтов;');
         appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - оператор Яндекс справочника.');
         break;
 
       case '/pet':
-        appendOutput('- Пока что не веду пет-проектов');
+        appendOutput('- [таск-трекер.рф](https://таск-трекер.рф/) - сделал для себя удобный таск-трекер.');
         break;
 
       case '/hero':
@@ -405,8 +404,8 @@ function appendOutput(text){
         break;
 
       case '/skills':
-        appendOutput('- Hard: agile-принципы и методологии, Trello, Kaiten, Notion, Разработка ТЗ, Tilda, uCoz, uApi, Miro, A/B-эксперименты');
-        appendOutput('- Soft: взаимодействие на всех этапах, фасилитация, деловая переписка');
+        appendOutput('- Hard: Tilda (ZERO Block, библиотеки расширений, eCommerce, интеграции), HTML, CSS, JS (junior), Rest-API интеграции, 1С (настройка); Email-маркетинг;');
+        appendOutput('- Soft: взаимодействие на всех этапах, Agile, деловая переписка, стрессоустойчивость. ');
         appendOutput('\u00A0');
         appendOutput('Если хотите подробный список введите Yes.');
         break;
@@ -417,25 +416,20 @@ function appendOutput(text){
         break;
 
       case '/live':
-        appendOutput('Азербайджан, г.Баку');
+        appendOutput('Россия, г.Санкт-Петербург');
         break;
 
       case '/hobby':
-        appendOutput('- Веду [ubot.help](https://ubot.help/);');
-        appendOutput('- любого рода медиа и не только контент;');
-        appendOutput('- пытаюсь паять всякое.');
+        appendOutput('- 3D-печать;');
+        appendOutput('- gaming;')
+        appendOutput('- радиоэлектроника;')
+        appendOutput('- техническая некрофилия.');
         break;
 
       case '/contact':
         appendOutput('- Telegram: [@default_db](https://t.me/default_db)');
         appendOutput('- Max: [там пока нет юзернеймов](https://max.ru/u/f9LHodD0cOK0vFx-6OeQSJlpWBuaGBmPyn5lXvlf0eqwbMBf1TPxqi7S3Ko)');
-        appendOutput('- Хабр: [dmitriizakharov](https://career.habr.com/dmitriizakharov)');
         appendOutput(`- Почта: ${mail}`);
-        break;
-
-      case '/date':
-        appendOutput('- Сайт обновлялся последний раз 18 июня 2026 года');
-        appendOutput('- [Следить на Github](https://github.com/dfltdlbb/zakharov/)');
         break;
 
       case '/reset':
