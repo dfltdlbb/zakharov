@@ -338,7 +338,7 @@ ul li{ list-style-position:inside!important; list-style:square; }
 .cli-fullscreen-toggle:focus-visible{
   outline:2px solid currentColor; outline-offset:2px;
 }
-.cli-fullscreen-toggle svg{ display:block; width:16px; height:16px; }
+.cli-fullscreen-toggle svg{ display:block; width:12px; height:12px; }
 .cli-fullscreen-toggle[aria-pressed="false"] .cli-collapse-icon,
 .cli-fullscreen-toggle[aria-pressed="true"] .cli-expand-icon{ display:none; }
 .dos-screen{ padding:10px; overflow-y:auto; min-height:0; overscroll-behavior:contain; scrollbar-gutter:stable; }

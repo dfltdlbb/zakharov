@@ -388,7 +388,7 @@ function appendOutput(text){
         break;
 
       case '/past':
-        appendOutput('- [ubot.help](https://ubot.help/) - когда-то вел, потом надоело');
+        appendOutput('- [ubot.help](https://ushopwebbot.ucoz.net/) - вел базу знаний конструктора для uCoz;');
         appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
         appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером, до 2025 года был менеджером проектов и руководил студией, в 2026 перешел на должность разработчик сайтов;');
         appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - оператор Яндекс справочника.');
