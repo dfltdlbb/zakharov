@@ -358,7 +358,7 @@ function appendOutput(text){
     appendOutput('- могу делать на CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
     appendOutput('- понимаю как администрировать: DNS, SSL;');
     appendOutput('- могу применять: SEO, Email-маркетинг;');
-    appendOutput('- использую LLM для: разработка совместно с AI, автоматизации.');
+    appendOutput('- использую LLM для: разработка совместно с AI, автоматизация.');
   }
 
   function processCommand(rawCmd) {
