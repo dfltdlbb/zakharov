@@ -353,12 +353,12 @@ function appendOutput(text){
 
   function showSkillsDetails() {
     appendOutput('- Использую для работы: VS Code, Jira, Yougile, Figma, Miro.');
-    appendOutput('- Анализирую через: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
-    appendOutput('- Dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка).');
-    appendOutput('- Могу делать на CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
-    appendOutput('- Понимаю как администрировать: DNS, SSL.');
-    appendOutput('- Могу применять: SEO, Email-маркетинг;');
-    appendOutput('- Использую LLM: разработка совместно с AI, автоматизация.');
+    appendOutput('- анализирую через: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
+    appendOutput('- dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка).');
+    appendOutput('- могу делать на CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
+    appendOutput('- понимаю как администрировать: DNS, SSL;');
+    appendOutput('- могу применять: SEO, Email-маркетинг;');
+    appendOutput('- использую LLM для: разработка совместно с AI, автоматизации.');
   }
 
   function processCommand(rawCmd) {
@@ -404,7 +404,7 @@ function appendOutput(text){
         break;
 
       case '/skills':
-        appendOutput('- Hard: Tilda (ZERO Block, библиотеки расширений, eCommerce, интеграции), HTML, CSS, JS (junior), Rest-API интеграции, 1С (настройка); Email-маркетинг;');
+        appendOutput('- Hard: Tilda (ZERO Block, библиотеки расширений, eCommerce, интеграции), HTML, CSS, JS (junior), Rest-API интеграции, 1С (настройка), Email-маркетинг;');
         appendOutput('- Soft: взаимодействие на всех этапах, Agile, деловая переписка, стрессоустойчивость. ');
         appendOutput('\u00A0');
         appendOutput('Если хотите подробный список введите Yes.');
