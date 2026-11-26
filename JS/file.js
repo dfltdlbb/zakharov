@@ -352,13 +352,13 @@ function appendOutput(text){
   const fullYears = 30;
 
   function showSkillsDetails() {
-    appendOutput('- Программы: VS Code, Jira, Yougile, Figma, Miro.');
-    appendOutput('- Аналитика: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
+    appendOutput('- Использую для работы: VS Code, Jira, Yougile, Figma, Miro.');
+    appendOutput('- Анализирую через: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
     appendOutput('- Dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка).');
-    appendOutput('- CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
-    appendOutput('- Администрирование: DNS, SSL.');
-    appendOutput('- Маркетинг: SEO, Email;');
-    appendOutput('- LLM: разработка совместно с AI, автоматизация.');
+    appendOutput('- Могу делать на CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
+    appendOutput('- Понимаю как администрировать: DNS, SSL.');
+    appendOutput('- Могу применять: SEO, Email-маркетинг;');
+    appendOutput('- Использую LLM: разработка совместно с AI, автоматизация.');
   }
 
   function processCommand(rawCmd) {
@@ -383,15 +383,15 @@ function appendOutput(text){
         break;
 
       case '/now':
-        appendOutput('- [Марк Инжиниринг jRL Россия](https://jrl-usa.ru/) - веб-разработчик, менеджер статистики;');
+        appendOutput('- [Марк Инжиниринг, дилер jRL Россия](https://jrl-usa.ru/) - веб-разработчик, менеджер статистики;');
         appendOutput('- [Kwork.ru](https://kwork.ru/user/dmitryzaharov/)  - делаю сайты, ботов, настраиваю email-рассылки.');
         break;
 
       case '/past':
         appendOutput('- [ubot.help](https://ushopwebbot.ucoz.net/) - вел базу знаний конструктора для uCoz;');
-        appendOutput('- [BoardCRM.io](https://boardcrm.io/) - менеджер разработки на поддержке, поддержка юзеров;');
+        appendOutput('- [BoardCRM.io](https://boardcrm.io/) - работал менеджером разработки на поддержке, поддерживал юзеров;');
         appendOutput('- [Divly.ru](https://divly.ru/) - до 2021 был аккаунт-менеджером, до 2025 года был менеджером проектов и руководил студией, в 2026 перешел на должность разработчик сайтов;');
-        appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - оператор Яндекс справочника.');
+        appendOutput('- [Яндекс Бизнес](https://business.yandex.ru/) - был оператором Яндекс справочника.');
         break;
 
       case '/pet':
@@ -422,8 +422,7 @@ function appendOutput(text){
       case '/hobby':
         appendOutput('- 3D-печать;');
         appendOutput('- gaming;')
-        appendOutput('- радиоэлектроника;')
-        appendOutput('- техническая некрофилия.');
+        appendOutput('- радиоэлектроника.')
         break;
 
       case '/contact':
@@ -483,9 +482,7 @@ function appendOutput(text){
   clearOutput();
 });
 
-/* =========================================================
-   5) «А чего так мало?» — запуск по вьюпорту, быстрый тайпинг
-   ========================================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
   const moreCard = document.querySelector('#more-projects-card, .more-card');
   if (!moreCard) return;
