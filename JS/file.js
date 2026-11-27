@@ -395,7 +395,7 @@ function appendOutput(text){
         break;
 
       case '/pet':
-        appendOutput('- [таск-трекер.рф](https://таск-трекер.рф/) - сделал для себя удобный таск-трекер.');
+        appendOutput('- Пет-проектов пока что в работе нет.');
         break;
 
       case '/hero':
