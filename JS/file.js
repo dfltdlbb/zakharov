@@ -354,7 +354,7 @@ function appendOutput(text){
   function showSkillsDetails() {
     appendOutput('- Использую для работы: VS Code, Jira, Yougile, Figma, Miro.');
     appendOutput('- анализирую через: Яндекс.Метрика, Google-Analyticks, Mail Postmaster.');
-    appendOutput('- dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка).');
+    appendOutput('- dev инструменты: HTML, CSS, JS (junior), REST API, 1С (настройка), Git.');
     appendOutput('- могу делать на CMS: Tilda, uCoz/uApi, Flexbe, WordPress, Open Cart, Яндекс Кит;');
     appendOutput('- понимаю как администрировать: DNS, SSL;');
     appendOutput('- могу применять: SEO, Email-маркетинг;');
@@ -490,6 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleEl = moreCard.querySelector('.typer-text');
   const paraEl  = moreCard.querySelector('.typer-paragraph');
   const btn     = moreCard.querySelector('#more-btn, .more-btn');
+  const constructionNote = moreCard.querySelector('#more-construction-note');
   let played = false;
 
   if (btn) {
@@ -526,11 +527,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (played) return;
     played = true;
     const t1 = 'А чего так мало?';
-    const t2 = 'Я показываю актуальный уровень качества моей работы. Все более ранние примеры не репрезентативны, но если они действительно вас интересуют, пишите, покажу.';
+    const t2 = 'На главной показываю последние 5 работ из портфолио, больше моих работ смотрите на странице реализованных задач.';
 
     if (titleEl) await typeText(titleEl, t1, 15);
-    if (paraEl)  await typeText(paraEl,  t2, 5);
-    if (btn)     btn.classList.add('show');
+    if (paraEl)  await typeText(paraEl,  t2, 10);
+    if (btn) {
+      btn.classList.add('btn-rect');
+      window.setTimeout(() => {
+        btn.classList.add('btn-show-text');
+        window.setTimeout(() => btn.classList.add('btn-wiggle'), 350);
+      }, 120);
+    }
+    if (constructionNote) {
+      window.setTimeout(() => { constructionNote.style.opacity = '1'; }, 520);
+    }
   }
 
   const onScroll = () => { if (inView(moreCard)) playTyper(); };
